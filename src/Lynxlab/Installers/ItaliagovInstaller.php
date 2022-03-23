@@ -14,6 +14,6 @@ class ItaliagovInstaller extends BaseInstaller
 
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $this->io->write("ItaliagovInstaller install");
+        $this->io->write(\sprintf("ItaliagovInstaller installed in %s", $this->getInstallPath($package)));
     }
 }
