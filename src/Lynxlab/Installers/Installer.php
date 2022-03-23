@@ -27,16 +27,16 @@ class Installer extends LibraryInstaller
      * Disables installers specified in main composer extra installer-disable
      * list
      */
-    public function __construct(
-        IOInterface $io,
-        Composer $composer,
-        string $type = 'library',
-        ?Filesystem $filesystem = null,
-        ?BinaryInstaller $binaryInstaller = null
-    ) {
-        parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
-        $this->removeDisabledInstallers();
-    }
+    // public function __construct(
+    //     IOInterface $io,
+    //     Composer $composer,
+    //     string $type = 'library',
+    //     ?Filesystem $filesystem = null,
+    //     ?BinaryInstaller $binaryInstaller = null
+    // ) {
+    //     parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
+    //     $this->removeDisabledInstallers();
+    // }
 
     /**
      * {@inheritDoc}
@@ -152,6 +152,7 @@ class Installer extends LibraryInstaller
      *  - false - enable all installers (useful with
      *     wikimedia/composer-merge-plugin or similar)
      */
+    /*
     protected function removeDisabledInstallers(): void
     {
         $extra = $this->composer->getPackage()->getExtra();
@@ -185,4 +186,5 @@ class Installer extends LibraryInstaller
             }
         }
     }
+    */
 }
