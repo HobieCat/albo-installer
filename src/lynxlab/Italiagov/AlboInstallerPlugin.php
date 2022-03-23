@@ -6,13 +6,13 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 
-class CustomInstallerPlugin implements PluginInterface
+class AlboInstallerPlugin implements PluginInterface
 {
     private $installer;
 
     public function activate(Composer $composer, IOInterface $io)
     {
-        $this->installer = new CustomInstaller($io, $composer);
+        $this->installer = new AlboInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($this->installer);
     }
 

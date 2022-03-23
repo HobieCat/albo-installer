@@ -1,12 +1,12 @@
 {
-    "name": "hobiecat/albo-installer",
+    "name": "hobiecat/albo-installer-plugin",
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
         "psr-0": {"lynxlab\\Italiagov": "src/"}
     },
     "extra": {
-        "class": "lynxlab\\Italiagov\\CustomInstallerPlugin"
+        "class": "lynxlab\\Italiagov\\AlboInstallerPlugin"
     },
     "require": {
         "composer-plugin-api": "^2.0"
