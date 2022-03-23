@@ -1,5 +1,5 @@
 {
-    "name": "hobiecat/installers",
+    "name": "hobiecat/italiagov-custom-installer",
     "type": "composer-plugin",
     "license": "MIT",
     "description": "A multi-framework Composer library installer",
