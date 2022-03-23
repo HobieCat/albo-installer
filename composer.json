@@ -1,25 +1,40 @@
 {
     "name": "hobiecat/alboinstaller",
     "type": "composer-plugin",
-    "description": "A multi-framework Composer library installer",
     "license": "MIT",
+    "description": "A multi-framework Composer library installer",
+    "keywords": [
+        "installer",
+        "Drupal"
+    ],
+    "homepage": "https://composer.github.io/installers/",
     "authors": [
         {
-            "name": "Giorgio Consorti",
-            "email": "g.consorti@lynxlab.com"
+            "name": "Kyle Robinson Young",
+            "email": "kyle@dontkry.com",
+            "homepage": "https://github.com/shama"
         }
     ],
     "autoload": {
-        "psr-4": {
-            "lynxlab\\Italiagov\\": "src/lynxlab/Italiagov"
-        }
+        "psr-4": { "Composer\\Installers\\": "src/Composer/Installers" }
     },
     "extra": {
-        "class": "lynxlab\\Italiagov\\AlboInstallerPlugin",
+        "class": "Composer\\Installers\\Plugin",
+        "branch-alias": {
+            "dev-main": "2.x-dev"
+        },
         "plugin-modifies-install-path": true
     },
     "require": {
         "php": "^7.2 || ^8.0",
         "composer-plugin-api": "^1.0 || ^2.0"
+    },
+    "require-dev": {
+        "composer/composer": "1.6.* || ^2.0",
+        "composer/semver": "^1 || ^3",
+        "symfony/phpunit-bridge": "^5.3",
+        "phpstan/phpstan": "^0.12.55",
+        "symfony/process": "^5",
+        "phpstan/phpstan-phpunit": "^0.12.16"
     }
 }
