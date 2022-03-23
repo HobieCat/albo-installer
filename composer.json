@@ -16,10 +16,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Hobiecat\\Installers\\": "src/lynxlab/Italiagov" }
+        "psr-4": { "Composer\\Installers\\": "src/Composer/Installers" }
     },
     "extra": {
-        "class": "Hobiecat\\Installers\\AlboInstallerPlugin",
+        "class": "Composer\\Installers\\Plugin",
         "plugin-modifies-install-path": true
     },
     "require": {
