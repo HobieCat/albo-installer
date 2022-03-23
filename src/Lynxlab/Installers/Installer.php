@@ -50,6 +50,18 @@ class Installer extends LibraryInstaller
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
+        $type = $package->getType();
+        $frameworkType = $this->findFrameworkType($type);
+
+        if ($frameworkType !== false) {
+            $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
+            if (method_exists($class, 'install')) {
+                $this->io->write('****** DOING INSTALL ********');
+                $installer = new $class($package, $this->composer, $this->getIO());
+                $installer->install($repo, $package);
+            }
+        }
+
         return parent::install($repo, $package);
     }
 
