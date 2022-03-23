@@ -20,23 +20,8 @@ class Installer extends LibraryInstaller
      * @var array<string, string>
      */
     private $supportedTypes = array(
-        'drupal'       => 'DrupalInstaller',
+        'italiagov'       => 'ItaliagovInstaller',
     );
-
-    /**
-     * Disables installers specified in main composer extra installer-disable
-     * list
-     */
-    // public function __construct(
-    //     IOInterface $io,
-    //     Composer $composer,
-    //     string $type = 'library',
-    //     ?Filesystem $filesystem = null,
-    //     ?BinaryInstaller $binaryInstaller = null
-    // ) {
-    //     parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
-    //     $this->removeDisabledInstallers();
-    // }
 
     /**
      * {@inheritDoc}
@@ -142,49 +127,4 @@ class Installer extends LibraryInstaller
     {
         return $this->io;
     }
-
-    /**
-     * Look for installers set to be disabled in composer's extra config and
-     * remove them from the list of supported installers.
-     *
-     * Globals:
-     *  - true, "all", and "*" - disable all installers.
-     *  - false - enable all installers (useful with
-     *     wikimedia/composer-merge-plugin or similar)
-     */
-    /*
-    protected function removeDisabledInstallers(): void
-    {
-        $extra = $this->composer->getPackage()->getExtra();
-
-        if (!isset($extra['installer-disable']) || $extra['installer-disable'] === false) {
-            // No installers are disabled
-            return;
-        }
-
-        // Get installers to disable
-        $disable = $extra['installer-disable'];
-
-        // Ensure $disabled is an array
-        if (!is_array($disable)) {
-            $disable = array($disable);
-        }
-
-        // Check which installers should be disabled
-        $all = array(true, "all", "*");
-        $intersect = array_intersect($all, $disable);
-        if (!empty($intersect)) {
-            // Disable all installers
-            $this->supportedTypes = array();
-            return;
-        }
-
-        // Disable specified installers
-        foreach ($disable as $key => $installer) {
-            if (is_string($installer) && key_exists($installer, $this->supportedTypes)) {
-                unset($this->supportedTypes[$installer]);
-            }
-        }
-    }
-    */
 }
