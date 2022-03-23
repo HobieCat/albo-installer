@@ -126,7 +126,7 @@ class Installer extends LibraryInstaller
     {
         $pattern = null;
         if (!empty($this->supportedTypes[$frameworkType])) {
-            $frameworkClass = 'Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
+            $frameworkClass = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
             /** @var BaseInstaller $framework */
             $framework = new $frameworkClass(new Package('dummy/pkg', '1.0.0.0', '1.0.0'), $this->composer, $this->getIO());
             $locations = array_keys($framework->getLocations($frameworkType));
