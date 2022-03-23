@@ -1,18 +1,25 @@
 {
-    "name": "hobiecat/albo-installer-plugin",
+    "name": "hobiecat/alboinstaller",
     "type": "composer-plugin",
+    "description": "A multi-framework Composer library installer",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Giorgio Consorti",
+            "email": "g.consorti@lynxlab.com"
+        }
+    ],
     "autoload": {
-        "psr-0": {"lynxlab\\Italiagov": "src/"}
+        "psr-4": {
+            "lynxlab\\Italiagov\\": "src/lynxlab/Italiagov"
+        }
     },
     "extra": {
         "class": "lynxlab\\Italiagov\\AlboInstallerPlugin",
         "plugin-modifies-install-path": true
     },
     "require": {
-        "composer-plugin-api": "^2.0"
-    },
-    "require-dev": {
-        "composer/composer": "^1.3"
+        "php": "^7.2 || ^8.0",
+        "composer-plugin-api": "^1.0 || ^2.0"
     }
 }
