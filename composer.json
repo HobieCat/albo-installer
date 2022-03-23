@@ -1,5 +1,5 @@
 {
-    "name": "hobiecat/italiagov-custom-installer-plugin",
+    "name": "hobiecat/albo-installer",
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
