@@ -1,18 +1,19 @@
 <?php
 
-namespace Hobiecat\Installers;
+namespace Lynxlab\Installers;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 
-class AlboInstallerPlugin implements PluginInterface
+class Plugin implements PluginInterface
 {
+    /** @var Installer */
     private $installer;
 
-    public function activate(Composer $composer, IOInterface $io)
+    public function activate(Composer $composer, IOInterface $io): void
     {
-        $this->installer = new AlboInstaller($io, $composer);
+        $this->installer = new Installer($io, $composer);
         $composer->getInstallationManager()->addInstaller($this->installer);
     }
 

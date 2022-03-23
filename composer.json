@@ -16,10 +16,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Composer\\Installers\\": "src/Composer/Installers" }
+        "psr-4": { "Lynxlab\\Installers\\": "src/Lynxlab/Installers" }
     },
     "extra": {
-        "class": "Composer\\Installers\\Plugin",
+        "class": "Lynxlab\\Installers\\Plugin",
         "plugin-modifies-install-path": true
     },
     "require": {
