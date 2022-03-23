@@ -3,7 +3,7 @@
 namespace lynxlab\Italiagov;
 
 use Composer\Package\PackageInterface;
-use Composer\Installer\PluginInstaller as BaseInstaller;
+use Composer\Installer\LibraryInstaller as BaseInstaller;
 
 class AlboInstaller extends BaseInstaller
 {
