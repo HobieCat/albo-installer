@@ -1,0 +1,17 @@
+{
+    "name": "hobiecat/italiagov-custom-installer-plugin",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {"lynxlab\\Italiagov\\Composer": "src/"}
+    },
+    "extra": {
+        "class": "lynxlab\\Italiagov\\CustomInstallerPlugin"
+    },
+    "require": {
+        "composer-plugin-api": "^2.0"
+    },
+    "require-dev": {
+        "composer/composer": "^1.3"
+    }
+}
