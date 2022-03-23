@@ -1,6 +1,6 @@
 <?php
 
-namespace lynxlab\Italiagov;
+namespace Lynxlab\Installers;
 
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller as BaseInstaller;

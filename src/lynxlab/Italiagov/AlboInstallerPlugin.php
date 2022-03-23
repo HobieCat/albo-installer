@@ -1,6 +1,6 @@
 <?php
 
-namespace lynxlab\Italiagov;
+namespace Lynxlab\Installers;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
