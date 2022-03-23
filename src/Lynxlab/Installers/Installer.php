@@ -2,14 +2,11 @@
 
 namespace Lynxlab\Installers;
 
-use Composer\Composer;
-use Composer\Installer\BinaryInstaller;
 use Composer\Installer\LibraryInstaller;
 use Composer\IO\IOInterface;
 use Composer\Package\Package;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
-use Composer\Util\Filesystem;
 use React\Promise\PromiseInterface;
 
 class Installer extends LibraryInstaller
@@ -20,7 +17,7 @@ class Installer extends LibraryInstaller
      * @var array<string, string>
      */
     private $supportedTypes = array(
-        'italiagov'       => 'ItaliagovInstaller',
+        'italiagov' => 'ItaliagovInstaller',
     );
 
     /**
@@ -46,6 +43,22 @@ class Installer extends LibraryInstaller
         }
 
         return $path;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        return parent::install($repo, $package);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        return parent::update($repo, $initial, $target);
     }
 
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
