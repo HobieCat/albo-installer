@@ -52,7 +52,7 @@ class Installer extends LibraryInstaller
             );
         }
 
-        $class = 'Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
+        $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
         $installer = new $class($package, $this->composer, $this->getIO());
 
         $path = $installer->getInstallPath($package, $frameworkType);
