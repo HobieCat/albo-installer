@@ -1,5 +1,5 @@
 {
-    "name": "lynxlab/installers",
+    "name": "hobiecat/installers",
     "type": "composer-plugin",
     "license": "MIT",
     "description": "A multi-framework Composer library installer",
@@ -16,10 +16,10 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Lynxlab\\Installers\\": "src/lynxlab/Italiagov" }
+        "psr-4": { "Hobiecat\\Installers\\": "src/lynxlab/Italiagov" }
     },
     "extra": {
-        "class": "Lynxlab\\Installers\\AlboInstallerPlugin",
+        "class": "Hobiecat\\Installers\\AlboInstallerPlugin",
         "plugin-modifies-install-path": true
     },
     "require": {

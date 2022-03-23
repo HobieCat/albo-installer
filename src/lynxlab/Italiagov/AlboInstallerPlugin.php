@@ -1,6 +1,6 @@
 <?php
 
-namespace Lynxlab\Installers;
+namespace Hobiecat\Installers;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;

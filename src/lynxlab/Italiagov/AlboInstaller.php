@@ -1,6 +1,6 @@
 <?php
 
-namespace Lynxlab\Installers;
+namespace Hobiecat\Installers;
 
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller as BaseInstaller;
