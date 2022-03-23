@@ -16,15 +16,23 @@ class ItaliagovInstaller extends BaseInstaller
 
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $basePath = $this->getInstallPath($package, self::frameworkType);
+        $this->doPostInstallOrUpdate($this->getInstallPath($package, self::frameworkType));
+    }
+
+    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    {
+        $this->doPostInstallOrUpdate($this->getInstallPath($target, self::frameworkType));
+    }
+
+    private function doPostInstallOrUpdate($basePath)
+    {
         if (!\is_file($basePath.'../italiagov.libraries.yml.original')) {
             if (\rename($basePath.'../italiagov.libraries.yml', $basePath.'../italiagov.libraries.yml.original')) {
-                $this->io->write("italiagov.libraries.yml successfully renamed to italiagov.libraries.yml.original!");
+                $this->io->write("  - italiagov.libraries.yml successfully renamed to italiagov.libraries.yml.original!");
             }
         }
         if (\copy($basePath.'italiagov.libraries.yml', $basePath.'../italiagov.libraries.yml')) {
-            $this->io->write("italiagov.libraries.yml successfully copied to parent dir!");
+            $this->io->write("  - italiagov.libraries.yml successfully copied to parent dir!");
         }
-        // $this->io->write(\sprintf("ItaliagovInstaller installed in %s", $this->getInstallPath($package, self::frameworkType)));
     }
 }

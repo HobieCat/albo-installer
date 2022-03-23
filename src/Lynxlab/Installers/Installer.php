@@ -57,12 +57,10 @@ class Installer extends LibraryInstaller
         if ($frameworkType !== false) {
             $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
             if (method_exists($class, 'install')) {
-                $this->io->write('****** DOING POST INSTALL ********');
                 $installer = new $class($package, $this->composer, $this->getIO());
                 $installer->install($repo, $package);
             }
         }
-
         return $parentInstall;
     }
 
@@ -71,7 +69,18 @@ class Installer extends LibraryInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
-        return parent::update($repo, $initial, $target);
+        $parentUpdate = parent::update($repo, $initial, $target);
+
+        $type = $package->getType();
+        $frameworkType = $this->findFrameworkType($type);
+        if ($frameworkType !== false) {
+            $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
+            if (method_exists($class, 'update')) {
+                $installer = new $class($target, $this->composer, $this->getIO());
+                $installer->update($repo, $initial, $target);
+            }
+        }
+        return $parentUpdate;
     }
 
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
