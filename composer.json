@@ -6,7 +6,8 @@
         "psr-0": {"lynxlab\\Italiagov": "src/"}
     },
     "extra": {
-        "class": "lynxlab\\Italiagov\\AlboInstallerPlugin"
+        "class": "lynxlab\\Italiagov\\AlboInstallerPlugin",
+        "plugin-modifies-install-path": true
     },
     "require": {
         "composer-plugin-api": "^2.0"
