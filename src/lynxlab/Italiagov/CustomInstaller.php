@@ -3,9 +3,9 @@
 namespace lynxlab\Italiagov;
 
 use Composer\Package\PackageInterface;
-use Composer\Installer\LibraryInstaller;
+use Composer\Installer\PluginInstaller as BaseInstaller;
 
-class CustomInstaller extends LibraryInstaller
+class CustomInstaller extends BaseInstaller
 {
     /**
      * @inheritDoc
