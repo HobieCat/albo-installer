@@ -33,11 +33,11 @@ class ItaliagovInstaller extends BaseInstaller
         foreach($moveToParent as $filename) {
             if (!\is_file($basePath.'..'.DIRECTORY_SEPARATOR.$filename.$backupExt)) {
                 if (\rename($basePath.'..'.DIRECTORY_SEPARATOR.$filename, $basePath.'..'.DIRECTORY_SEPARATOR.$filename.$backupExt)) {
-                    $this->io->write("  - <comment>$filename</comment> successfully renamed to $filename$backupExt!");
+                    $this->io->write("  - <info>$filename</info> successfully renamed to <comment>$filename$backupExt</comment>!");
                 }
             }
             if (\copy($basePath.$filename, $basePath.'..'.DIRECTORY_SEPARATOR.$filename)) {
-                $this->io->write("  - <comment>$filename</comment> successfully copied to parent dir!");
+                $this->io->write("  - <info>$filename</info> successfully copied to parent dir!");
             }
         }
     }
