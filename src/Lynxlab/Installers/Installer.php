@@ -27,15 +27,13 @@ class Installer extends LibraryInstaller
     {
         $type = $package->getType();
         $frameworkType = $this->findFrameworkType($type);
+        $installer = $this->getInstaller($package);
 
-        if ($frameworkType === false) {
+        if ($installer === null) {
             throw new \InvalidArgumentException(
                 'Sorry the package type of this package is not yet supported.'
             );
         }
-
-        $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
-        $installer = new $class($package, $this->composer, $this->getIO());
 
         $path = $installer->getInstallPath($package, $frameworkType);
         if (!$this->filesystem->isAbsolutePath($path)) {
@@ -50,17 +48,18 @@ class Installer extends LibraryInstaller
      */
     public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
+        $installer = $this->getInstaller($package);
+
+        if ($installer !== null && method_exists($installer, 'preInstall')) {
+            $installer->preInstall($repo, $package);
+        }
+
         $parentInstall = parent::install($repo, $package);
 
-        $type = $package->getType();
-        $frameworkType = $this->findFrameworkType($type);
-        if ($frameworkType !== false) {
-            $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
-            if (method_exists($class, 'install')) {
-                $installer = new $class($package, $this->composer, $this->getIO());
-                $installer->install($repo, $package);
-            }
+        if ($installer !== null && method_exists($installer, 'postInstall')) {
+            $installer->postInstall($repo, $package);
         }
+
         return $parentInstall;
     }
 
@@ -69,17 +68,18 @@ class Installer extends LibraryInstaller
      */
     public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
+        $installer = $this->getInstaller($target);
+
+        if ($installer !== null && method_exists($installer, 'preUpdate')) {
+            $installer->preUpdate($repo, $initial, $target);
+        }
+
         $parentUpdate = parent::update($repo, $initial, $target);
 
-        $type = $package->getType();
-        $frameworkType = $this->findFrameworkType($type);
-        if ($frameworkType !== false) {
-            $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
-            if (method_exists($class, 'update')) {
-                $installer = new $class($target, $this->composer, $this->getIO());
-                $installer->update($repo, $initial, $target);
-            }
+        if ($installer !== null && method_exists($installer, 'postUpdate')) {
+            $installer->postUpdate($repo, $initial, $target);
         }
+
         return $parentUpdate;
     }
 
@@ -91,7 +91,17 @@ class Installer extends LibraryInstaller
             $io->write(sprintf('Deleting %s - %s', $installPath, !file_exists($installPath) ? '<comment>deleted</comment>' : '<error>not deleted</error>'));
         };
 
+        $installer = $this->getInstaller($package);
+
+        if ($installer !== null && method_exists($installer, 'preUninstall')) {
+            $installer->preUninstall($repo, $package);
+        }
+
         $promise = parent::uninstall($repo, $package);
+
+        if ($installer !== null && method_exists($installer, 'postUninstall')) {
+            $installer->postUninstall($repo, $package);
+        }
 
         // Composer v2 might return a promise here
         if ($promise instanceof PromiseInterface) {
@@ -156,6 +166,19 @@ class Installer extends LibraryInstaller
         }
 
         return $pattern ?: '(\w+)';
+    }
+
+    private function getInstaller(PackageInterface $package)
+    {
+        $type = $package->getType();
+        $frameworkType = $this->findFrameworkType($type);
+        if ($frameworkType !== false) {
+            $class = 'Lynxlab\\Installers\\' . $this->supportedTypes[$frameworkType];
+            $installer = new $class($package, $this->composer, $this->getIO());
+        } else {
+            $installer = null;
+        }
+        return $installer;
     }
 
     private function getIO(): IOInterface

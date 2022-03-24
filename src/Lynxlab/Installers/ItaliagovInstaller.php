@@ -14,25 +14,31 @@ class ItaliagovInstaller extends BaseInstaller
         'extrafiles' => 'themes/custom/italiagov/{$name}/',
     );
 
-    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    public function postInstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         $this->doPostInstallOrUpdate($this->getInstallPath($package, self::frameworkType));
     }
 
-    public function update(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
+    public function postUpdate(InstalledRepositoryInterface $repo, PackageInterface $initial, PackageInterface $target)
     {
         $this->doPostInstallOrUpdate($this->getInstallPath($target, self::frameworkType));
     }
 
     private function doPostInstallOrUpdate($basePath)
     {
-        if (!\is_file($basePath.'../italiagov.libraries.yml.original')) {
-            if (\rename($basePath.'../italiagov.libraries.yml', $basePath.'../italiagov.libraries.yml.original')) {
-                $this->io->write("  - italiagov.libraries.yml successfully renamed to italiagov.libraries.yml.original!");
+        $backupExt = '.original';
+        $moveToParent = [
+            'italiagov.libraries.yml',
+        ];
+        foreach($moveToParent as $filename) {
+            if (!\is_file($basePath.'..'.DIRECTORY_SEPARATOR.$filename.$backupExt)) {
+                if (\rename($basePath.'..'.DIRECTORY_SEPARATOR.$filename, $basePath.'..'.DIRECTORY_SEPARATOR.$filename.$backupExt)) {
+                    $this->io->write("  - <comment>$filename</comment> successfully renamed to $filename$backupExt!");
+                }
             }
-        }
-        if (\copy($basePath.'italiagov.libraries.yml', $basePath.'../italiagov.libraries.yml')) {
-            $this->io->write("  - italiagov.libraries.yml successfully copied to parent dir!");
+            if (\copy($basePath.$filename, $basePath.'..'.DIRECTORY_SEPARATOR.$filename)) {
+                $this->io->write("  - <comment>$filename</comment> successfully copied to parent dir!");
+            }
         }
     }
 }
